@@ -1,0 +1,14 @@
+version: "3.8"
+# test
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nginx_404
+    #volumes:
+    #  - ../volume/${cliName}/www:/home/wordpress/www
+    environment:
+      - ZAZA=test
+    ports:
+      - 20404:80

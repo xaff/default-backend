@@ -1,8 +1,8 @@
-export DOCKER_ORG ?= cloudposse
+export DOCKER_ORG ?= xaff
 export DOCKER_IMAGE ?= $(DOCKER_ORG)/default-backend
 export DOCKER_TAG ?= latest
 export DOCKER_IMAGE_NAME ?= $(DOCKER_IMAGE):$(DOCKER_TAG)
-export DOCKER_BUILD_FLAGS = 
+export DOCKER_BUILD_FLAGS =
 
 -include $(shell curl -sSL -o .build-harness "https://git.io/build-harness"; echo .build-harness)
 
@@ -18,4 +18,4 @@ push:
 	docker push $(DOCKER_IMAGE)
 
 run:
-	docker run -it ${DOCKER_IMAGE_NAME} sh
+	docker run -it --rm -p 1234:80 ${DOCKER_IMAGE_NAME} sh

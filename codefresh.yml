@@ -43,10 +43,11 @@ steps:
         all:
           executeForBranch: "'${{SEMVERSION_BRANCH}}' != ''"
 
-  push_image_tag_to_cfcr:
+  push_image_tag_to_aws_test:
     title: Push image with tag based semver tags
     type: push
-    registry: cfcr
+    registry: default-backend
+    image_name: xaff/${{CF_REPO_NAME}}
     candidate: ${{build_image}}
     tag: "${{SEMVERSION_TAG}}"
     when:
@@ -54,35 +55,11 @@ steps:
         all:
           executeForTag: "'${{SEMVERSION_TAG}}' != ''"
 
-  push_image_tag_to_dockerhub:
-    title: Push image with tag based semver tags
-    type: push
-    registry: dockerhub
-    image_name: cloudposse/${{CF_REPO_NAME}}
-    candidate: ${{build_image}}
-    tag: "${{SEMVERSION_TAG}}"
-    when:
-      condition:
-        all:
-          executeForTag: "'${{SEMVERSION_TAG}}' != ''"
-
-
-  push_image_latest_to_cfcf:
+  push_image_latest_to_aws_test:
     title: Push image with latest tag
     type: push
-    registry: cfcr
-    candidate: ${{build_image}}
-    tag: latest
-    when:
-      condition:
-        all:
-          executeForMasterBranch: "'${{CF_BRANCH}}' == 'master'"
-
-  push_image_latest_to_dockerhub:
-    title: Push image with latest tag
-    type: push
-    registry: dockerhub
-    image_name: cloudposse/${{CF_REPO_NAME}}
+    registry: default-backend
+    image_name: xaff/${{CF_REPO_NAME}}
     candidate: ${{build_image}}
     tag: latest
     when:
