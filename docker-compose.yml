@@ -11,4 +11,4 @@ services:
     environment:
       - ZAZA=test
     ports:
-      - 20404:80
+      - 80:80
